@@ -1,7 +1,6 @@
 
 -- Nikto Commands --
 
-
 A very short post related on Nikto scan, here we have mentioned few Nikto commands 
 
 root@hdna# nikto
