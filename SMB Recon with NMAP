@@ -1,0 +1,28 @@
+
+SMB Protocol [445] - SMB RECON NOTES 
+
+
+nmap -p445 --script smb-protocols 10.0.10.10  //Nmap script to list the supported protocols and dialects of an SMB server
+
+nmap -p445 --script smb-security-mode 10.0.10.10  //Nmap security mode script to return the information about the SMB security level
+
+nmap -p445 --script smb-enum-sessions 10.10.10.10  //Nmap script to enumerating the users logged into a system through an SMB share 
+
+nmap -p445 --script smb-enum-shares 10.10.10.10  //Enumerate shares 
+
+Enumerate Information using below commands (Required credentials)
+nmap -p445 --script smb-enum-sessions --script-args smbusername=administrator,smbpassword=password@1233 10.10.10.10  //Nmap script to enumerating the users logged into a system through an SMB share 
+
+nmap -p445 --script smb-enum-shares --script-args smbusername=administrator,smbpassword=password@1233 10.10.10.10  //Scanning all shares with valid creds to check the permission (Read / Write)
+
+nmap -p445 --script smb-enum-users --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate Windows Users
+
+nmap -p445 --script smb-server-stats --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate Server statistics
+
+nmap -p445 --script smb-enum-domains --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate domains on target machine
+
+nmap -p445 --script smb-enum-groups --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate User Groups 
+
+nmap -p445 --script smb-enum-services --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate Services
+
+nmap -p445 --script smb-enum-shares,smb-ls --script-args smbusername=administrator,smbpassword=password@12333 10.10.10.10  //Enumerate Share folder and drives 
