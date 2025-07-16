@@ -1,7 +1,6 @@
 
 -- Useful commands to recon the SMP (Port 445) protocol --
 
-
 smbmap -u guest -p "" -d . -H 10.10.10.10  //Running smbmap tool to discover all shared folders and drives with guest account.
 
 smbmap -u administrator -p pass@1233 -d . -H 10.10.10.10  //Running smbmap tool  with valid creds
