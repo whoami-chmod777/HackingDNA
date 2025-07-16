@@ -72,15 +72,18 @@ enum4linux - Password policy
 enum4linux -u <user> -p <pass> -P [TARGET IP]
 
 nmap - Enum Users
-nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
+nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain 
+nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
 
 nmap --script smb-enum-users.nse --script-args smbusername=User1,smbpass=Pass@1234,smbdomain=workstation -p445 [TARGET IP]
 
 nmap - Enum Groups
-nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
+nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain 
+nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
 
 nmap - Enum Shares
-nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=LM:NTLM,smbdomain=domain
+nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain 
+nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=LM:NTLM,smbdomain=domain
 
 nmap - OS Discovery
 nmap -p 445 --script smb-os-discovery [TARGET IP]
