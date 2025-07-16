@@ -1,0 +1,134 @@
+
+-- Enumerate Network Services --
+
+This list provides commands to enumerate network services to gather initial information during penetration testing. This list will be updated time to time, so bookmark this page for the updates.
+
+>> WEB ENUMERATION <<
+
+Dirsearch
+dirsearch -u target.com -e sh,txt,htm,php,cgi,html,pl,bak,old
+dirsearch -u target.com -e sh,txt,htm,php,cgi,html,pl,bak,old -w path/to/wordlist
+dirsearch -u https://target.com -e .
+
+dirb
+dirb http://target.com /path/to/wordlist
+dirb http://target.com /path/to/wordlist -X .sh,.txt,.htm,.php,.cgi,.html,.pl,.bak,.old
+
+Nikto
+nikto -h http://example.com
+
+GOBUSTER 
+gobuster dir -u http://10.10.10.1 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+
+
+>> SSH ENUMERATION [TCP PORT 22] <<
+
+nmap -sV [TARGET IP]  //Version Check
+nc [TARGET IP]  //Fetch banner using netcat
+ssh root@[TARGET IP]  //Fetch Pre-login SSH banner
+
+//Enumerate "encrytion algorithm" supported by SSH server
+nmap --script ssh2-enum-algos [TARGET IP]      
+
+//Enumerate ssh-rsa host key used by SSH server 
+nmap --script ssh-hostkey --script-args ssh_hostkey=full [TARGET IP]           
+
+//Enumerate Authentication method for user admin used by SSH server 
+nmap -p 22 --script ssh-auth-methods --script-args="ssh.user=admin" [TARGET IP]       
+
+hydra -l admin -P /usr/share/wordlists/rockyou.txt [TARGET IP] ssh  //Find password for user admin
+
+//Find the password of user “administrator” using appropriate Nmap scripts with password dictionary: /usr/share/nmap/nselib/data/passwords.lst
+echo "administrator" > users          
+nmap -p 22 --script ssh-brute --script-args userdb=/root/users [TARGET IP]     
+
+Searches password of user “root” using ssh_login Metasploit module with userpass dictionary: /usr/share/wordlists/metasploit/root_userpass.txt
+
+Commands: 
+msfconsole
+use auxiliary/scanner/ssh/ssh_login
+set RHOSTS [TARGET IP]
+set USERPASS_FILE /usr/share/wordlists/metasploit/root_userpass.txt 
+set STOP_ON_SUCCESS true
+set verbose true
+exploit 
+
+
+>> SMB ENUMERATION [TCP PORT 445] <<
+
+enum4linux - General enumeration - anonymous session
+enum4linux -a [TARGET IP]
+
+enum4linux - General enumeration - authenticated session
+enum4linux -a [TARGET IP] -u <user> -p <pass>
+
+enum4linux - Users enumeration
+enum4linux -u <user> -p <pass> -U [TARGET IP]
+
+enum4linux - Group and members enumeration
+enum4linux -u <user> -p <pass> -G [TARGET IP]
+
+enum4linux - Password policy
+enum4linux -u <user> -p <pass> -P [TARGET IP]
+
+nmap - Enum Users
+nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-users [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
+
+nmap --script smb-enum-users.nse --script-args smbusername=User1,smbpass=Pass@1234,smbdomain=workstation -p445 [TARGET IP]
+
+nmap - Enum Groups
+nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-groups [TARGET IP] --script-args smbuser=username,smbhash=LM:NTLM,smbdomain=domain
+
+nmap - Enum Shares
+nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=password,smbdomain=domain nmap -p 445 --script smb-enum-shares [TARGET IP] --script-args smbuser=username,smbpass=LM:NTLM,smbdomain=domain
+
+nmap - OS Discovery
+nmap -p 445 --script smb-os-discovery [TARGET IP]
+
+nmap - SMB Vulnerabilities on Windows
+nmap -p 445 --script smb-vuln-ms06-025 [TARGET IP] 
+nmap -p 445 --script smb-vuln-ms07-029 [TARGET IP] 
+nmap -p 445 --script smb-vuln-ms08-067 [TARGET IP] 
+nmap -p 445 --script smb-vuln-ms10-054 [TARGET IP] 
+nmap -p 445 --script smb-vuln-ms10-061 [TARGET IP] 
+nmap -p 445 --script smb-vuln-ms17-010 [TARGET IP] 
+
+NMAP - Brute Force Accounts
+nmap –p 445 --script smb-brute –script-args userdb=user-list.txt,passdb=pass-list.txt [TARGET IP]
+
+
+>> SNMP ENUMERATION [UDP PORT 161] <<
+
+NMAP
+nmap -sV -p 161 --script=snmp-info [TARGET-IP]
+nmap -sU -p 161 --script=*snmp* [TARGET IP]
+
+XPROBE
+xprobe2 -v -p udp:161:open [TARGET IP]
+
+SNMPWALK
+Example:
+snmpwalk -c public -v1 [TARGET IP]
+snmpwalk -c public -v1 [TARGET IP] 1.3.6.1.4.1.77.1.2.25   //Enumerate user list 
+
+SNMP-CHECK
+Example:
+snmp-check -t 172.20.10.5
+snmp-check -t 172.20.10.5 -c public
+
+OneSixtyone
+onesixtyone -c community.txt  -i [TARGET IP]
+onesixtyone -c /usr/share/wordlists/dirb/small.txt [TARGET IP]    // find communities with bruteforce
+
+Metasploit Auxilliary
+msf >  use auxiliary/scanner/snmp/snmp_login
+msf > use auxiliary/scanner/snmp/snmp_enum
+
+
+
+
+
+
+
+
+
