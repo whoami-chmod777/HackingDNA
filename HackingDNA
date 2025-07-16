@@ -1,0 +1,9 @@
+
+A very short post related on Nikto scan, here we have mentioned few Nikto commands 
+
+root@hdna# nikto
+root@hdna# nikto -Help  //To view nikto help or options 
+
+root@hdna# nikto -h http://10.10.10.10  //Scan Target using Nikto 
+root@hdna# nikto -h http://10.10.10.10/index.php?page=arbitrary-file-inclusion.php -Tuning 5 -Display V  //Check the remote file retrieval in verbose mode
+root@hdna# nikto -h http://10.10.10.10/index.php?page=arbitrary-file-inclusion.php -Tuning 5 -o nikto.html -Format htm  //Save the scan result in .html format
