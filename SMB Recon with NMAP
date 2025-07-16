@@ -1,7 +1,6 @@
 
 -- SMB Protocol [445] - SMB RECON NOTES --
 
-
 nmap -p445 --script smb-protocols 10.0.10.10  //Nmap script to list the supported protocols and dialects of an SMB server
 
 nmap -p445 --script smb-security-mode 10.0.10.10  //Nmap security mode script to return the information about the SMB security level
