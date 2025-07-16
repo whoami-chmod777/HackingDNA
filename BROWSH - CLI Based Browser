@@ -1,0 +1,26 @@
+
+-- BROWSH - CLI Based Browser --
+
+Installation [Kali]
+kali@kali:~$ sudo wget https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_linux_amd64.deb
+
+kali@kali:~$ sudo apt install ./browsh_1.6.4_linux_amd64.deb
+
+HELP
+kali@kali:~$ browsh -h
+Usage of browsh:
+      --debug                  Log to ./debug.log
+      --firefox.path string    Path to Firefox executable (default "firefox")
+      --firefox.use-existing   Whether Browsh should launch Firefox or not
+      --firefox.with-gui       Don't use headless Firefox
+      --http-server-mode       Run as an HTTP service
+      --monochrome             Start browsh in monochrome mode
+      --startup-url string     URL to launch at startup (default "https://www.brow.sh")
+      --time-limit int         Kill Browsh after the specified number of seconds
+      --version                Output current Browsh version
+pflag: help requested
+kali@kali:~$ 
+
+
+Running Browsh
+kali@kali:~$ browsh --startup-url http://google.com
