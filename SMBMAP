@@ -1,0 +1,21 @@
+
+Useful commands to recon the SMP (Port 445) protocol.
+
+
+smbmap -u guest -p "" -d . -H 10.10.10.10  //Running smbmap tool to discover all shared folders and drives with guest account.
+
+smbmap -u administrator -p pass@1233 -d . -H 10.10.10.10  //Running smbmap tool  with valid creds
+
+smbmap -H 10.10.10.10 -u administrator -p pass@1233 -x 'ipconfig    //Execute commands 
+
+smbmap -H 10.10.10.10 -u Administrator -p 'pass@1233' -L              //List all drives 
+
+smbmap -H 10.10.10.10 -u Administrator -p 'pass@1233' -r 'C$      //List content of C drive
+
+smbmap -H 10.10.10.10 -u Administrator -p 'pass@1233' --upload '/root/testsample.txt' 'C$\testsample.txt'  //Upload a test sample file 
+
+smbmap -H 10.10.10.10 -u Administrator -p 'pass@1233' --download 'C$\testsample.txt'   //Download a testsample file 
+
+
+Reference 
+https://github.com/ShawnDEvans/smbmap
